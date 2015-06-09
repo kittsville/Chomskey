@@ -1,4 +1,4 @@
-# Chomskey
+# Chomskey - The Online Keyboard Layout
 
 >Chomsky speaks to you, his chosen ones
 
