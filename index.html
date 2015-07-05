@@ -1,0 +1,143 @@
+
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+	<!-- I'm not gonna lie, at least 50% of my motivation for this project is amusing myself at the project's name -->
+	<!-- The other 50% is distracting myself from a mail server I don't want to set up. Mail servers are scary -->
+	<!-- 10% is to annoy Alex with the pun -->
+	<title>Chomskey - The Online Keyboard Layout</title>
+	<!-- And 100% reason to remember the name -->
+	<!-- Heh...Chomskey -->
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="description" content="Create and use your own keyboard layout online. Use a different keyboard layout without having to install one on your local machine.">
+	<meta name="abstract" content="Dynamic Keyboard Layout Editor">
+	<meta name="keywords" content="Keyboard Layout, linguistics">
+	<meta name="author" content="Kit Maywood">
+	<link rel="stylesheet" type="text/css" href="assets/core.css">
+</head>
+<body>
+<header>
+	<h1>Chomskey</h1>
+	<h3>Dynamic Keyboard Layout Editor</h3>
+</header>
+<div id="typing-area">
+	<textarea placeholder="Text goes here"></textarea>
+</div>
+<div id="keyboard">
+	<div id="top-row">
+		<a id="key-escape" key="27" type="button">Esc</a>
+		
+		<div id="function-keys" class="keyboard-row">
+			<div class="key-group">
+				<a id="key-f1" key="112" type="button">F1</a>
+				<a id="key-f2" key="113" type="button">F2</a>
+				<a id="key-f3" key="114" type="button">F3</a>
+				<a id="key-f4" key="115" type="button">F4</a>
+			</div>
+			<div class="key-group">
+				<a id="key-f5" key="116" type="button">F5</a>
+				<a id="key-f6" key="117" type="button">F6</a>
+				<a id="key-f7" key="118" type="button">F7</a>
+				<a id="key-f8" key="119" type="button">F8</a>
+			</div>
+			<div class="key-group">
+				<a id="key-f9" key="120" type="button">F9</a>
+				<a id="key-f10" key="121" type="button">F10</a>
+				<a id="key-f11" key="122" type="button">F11</a>
+				<a id="key-f12" key="123" type="button">F12</a>
+			</div>
+		</div>
+		
+		<div id="system-keys">
+		</div>
+	</div>
+	<div id="main-block">
+		<div class="keyboard-row">
+			<a id="key-backquote" key="192" type="button">`</a>
+			<a id="key-1" key="49" type="button">1</a>
+			<a id="key-2" key="50" type="button">2</a>
+			<a id="key-3" key="51" type="button">3</a>
+			<a id="key-4" key="52" type="button">4</a>
+			<a id="key-5" key="53" type="button">5</a>
+			<a id="key-6" key="54" type="button">6</a>
+			<a id="key-7" key="55" type="button">7</a>
+			<a id="key-8" key="56" type="button">8</a>
+			<a id="key-9" key="57" type="button">9</a>
+			<a id="key-0" key="48" type="button">0</a>
+			<a id="key-minus" key="173" type="button">-</a>
+			<a id="key-equals" key="61" type="button">=</a>
+			<a id="key-backspace" key="8" type="button">Backspace</a>
+		</div>
+		<div class="keyboard-row">
+			<a id="key-tab" key="9" type="button">Tab</a>
+			<a id="key-q" key="81" type="button">q</a>
+			<a id="key-w" key="87" type="button">w</a>
+			<a id="key-e" key="69" type="button">e</a>
+			<a id="key-r" key="82" type="button">r</a>
+			<a id="key-t" key="84" type="button">t</a>
+			<a id="key-y" key="89" type="button">y</a>
+			<a id="key-u" key="85" type="button">u</a>
+			<a id="key-i" key="73" type="button">i</a>
+			<a id="key-o" key="79" type="button">o</a>
+			<a id="key-p" key="80" type="button">p</a>
+			<a id="key-open-brackets" key="219" type="button">[</a>
+			<a id="key-close-brackets" key="221" type="button">]</a>
+			<a id="key-enter" key="13" type="button">Enter</a>
+		</div>
+		<div class="keyboard-row">
+			<a id="key-caps" key="20" type="button">Caps</a>
+			<a id="key-a" key="65" type="button">a</a>
+			<a id="key-s" key="83" type="button">s</a>
+			<a id="key-d" key="68" type="button">d</a>
+			<a id="key-f" key="70" type="button">f</a>
+			<a id="key-g" key="71" type="button">g</a>
+			<a id="key-h" key="72" type="button">h</a>
+			<a id="key-j" key="74" type="button">j</a>
+			<a id="key-k" key="75" type="button">k</a>
+			<a id="key-l" key="76" type="button">l</a>
+			<a id="key-colon" key="59" type="button">;</a>
+			<a id="key-apostrophe" key="222" type="button">'</a>
+			<a id="key-hash" key="163" type="button">#</a>
+		</div>
+		<div class="keyboard-row">
+			<a id="key-left-shift" key="16" type="button">Shift</a>
+			<a id="key-backslash" key="220" type="button">\</a>
+			<a id="key-z" key="90" type="button">z</a>
+			<a id="key-x" key="88" type="button">x</a>
+			<a id="key-c" key="67" type="button">c</a>
+			<a id="key-v" key="86" type="button">v</a>
+			<a id="key-b" key="66" type="button">b</a>
+			<a id="key-n" key="78" type="button">n</a>
+			<a id="key-m" key="77" type="button">m</a>
+			<a id="key-comma" key="188" type="button">,</a>
+			<a id="key-full-stop" key="190" type="button">.</a>
+			<a id="key-forward-slash" key="191" type="button">/</a>
+			<a id="key-right-shift" key="16" type="button">Shift</a>
+		</div>
+		<div class="keyboard-row">
+			<a id="key-left-control" key="17" type="button">Ctrl</a>
+			<a id="key-left-window" key="91" type="button">Start</a>
+			<a id="key-left-alt" key="18" type="button">Alt</a>
+			<a id="key-space" key="32" type="button">Space</a>
+			<a id="key-right-alt" key="18" type="button">Alt</a>
+			<a id="key-right-window" key="91" type="button">Start</a>
+			<a id="key-select" key="93" type="button">Select</a>
+			<a id="key-right-control" key="17" type="button">Ctrl</a>
+		</div>
+	</div>
+	<div id="screen-control-keys">
+	</div>
+	<div id="navigation-keys">
+	</div>
+	<div id="numpad">
+		<!-- Complete this -->
+	</div>
+	</div>
+</div>
+<div id="foot">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script type="text/javascript" src="assets/core.js"></script>
+</div>
+</body>
+</html>

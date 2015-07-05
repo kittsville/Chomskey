@@ -1,0 +1,75 @@
+body {
+	background-color: #F1F1F1;
+	margin: 0 2.5%;
+	font-family: Verdana,Helvetica Neue,Helvetica,sans-serif;
+}
+
+header {
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+#typing-area textarea {
+	margin: 5px 0;
+	padding: 5px;
+	width: 100%;
+	height: 200px;
+	background: #fff;
+	border: 1px solid #f9f9f9;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	resize: none;
+}
+
+.keyboard-row a {
+	float: left;
+}
+
+.keyboard-row {
+	display: inline;
+}
+
+/* Key Formatting */
+
+#keyboard {
+	margin: 0;
+	padding: 0;
+}
+
+#keyboard a {
+	display: inline-block;
+	background-color: #FCFCFC;
+	overflow: hidden;
+	line-height: 35px;
+	color: grey;
+	border-radius: 2px;
+	vertical-align: centre;
+	margin: 1px;
+	height: 38px;
+	width: 38px;
+	margin: 1px;
+	text-align: center;
+}
+
+#keyboard a#key-backspace {
+	width: 95px;
+}
+
+#keyboard a#key-tab {
+	width: 57px;
+}
+
+#keyboard a:link, #keyboard a:visited, #keyboard a:hover, #keyboard a:active {
+    text-decoration: none;
+}
+
+#keyboard a:hover {
+	cursor: pointer;
+	color: grey;
+	background-color: #e5e5e5;
+}
+
+#keyboard a:active, #keyboard a.pressed {
+	color: white;
+	background-color: #cccccc;
+}
