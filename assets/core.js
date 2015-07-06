@@ -54,7 +54,7 @@ var Chomskey = {
 		} else {
 			console.log('Unable to find HTML element for JS keycode ' + keyCode);
 			
-			return '';
+			return false;
 		}
 	},
 	
@@ -65,7 +65,7 @@ var Chomskey = {
 		} else {
 			console.log('Unable to find mapping for JS keycode ' + keyCode);
 			
-			return '';
+			return false;
 		}
 	},
 };
