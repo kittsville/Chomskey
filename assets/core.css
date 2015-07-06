@@ -32,8 +32,8 @@ header {
 /* Key Formatting */
 
 #keyboard {
-	margin: 0;
-	padding: 0;
+	display: inline-block;
+	width: 700px;
 }
 
 #keyboard a {
