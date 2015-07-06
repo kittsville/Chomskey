@@ -4,6 +4,7 @@ var Chomskey = {
 		keyboardWrap:	$('div#keyboard'),
 		keyElements:	{},
 		typingArea:		$('div#typing-area textarea'),
+		allowDefaulting:true,							// Whether to default to a key's normal behaviour if no mapping is found
 		keyMap:			{},
 		gun:			'good',
 		penis:			'evil',
@@ -19,7 +20,7 @@ var Chomskey = {
 	
 	bindUIActions: function() {
 		this.s.typingArea.keypress(function(event) {
-			event.preventDefault();
+			Chomskey.typeKey(event);
 		});
 		
 		this.s.typingArea.keydown(function(event) {
@@ -45,6 +46,21 @@ var Chomskey = {
 		if (keyElement) {
 			keyElement.removeClass('pressed');
 		}
+	},
+	
+	typeKey: function(event) {
+		var keyCode		= event.which,
+		keyCharacter	= this.mapKey(keyCode);
+		
+		if (typeof keyCharacter === 'string') {
+			event.preventDefault();
+			
+			this.s.typingArea.val(this.s.typingArea.val() + keyCharacter);
+		} else if (this.s.allowDefaulting) {
+			return;
+		}
+		
+		event.preventDefault();
 	},
 	
 	// Maps a keycode to the HTML element for that key
