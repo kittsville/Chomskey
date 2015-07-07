@@ -33,7 +33,7 @@ var Chomskey = {
 		});
 		
 		this.s.keyboardWrap.on('click', 'a', function(event) {
-			editKey.openWindow(event.currentTarget);
+			EditKey.openWindow(event.currentTarget);
 		});
 	},
 	
@@ -105,7 +105,7 @@ var Chomskey = {
 	},
 };
 
-var editKey = {
+var EditKey = {
 	// Settings
 	s: {
 		overlay:		$('div#edit-key-overlay'),
@@ -125,23 +125,23 @@ var editKey = {
 	},
 	
 	bindUIActions: function() {
-		this.s.updateButton.click(editKey.saveKey);
+		this.s.updateButton.click(EditKey.saveKey);
 		
-		this.s.closeButton.click(editKey.closeWindow);
-		this.s.overlay.click(editKey.closeWindow);
-		this.s.cancelButton.click(editKey.closeWindow);
+		this.s.closeButton.click(EditKey.closeWindow);
+		this.s.overlay.click(EditKey.closeWindow);
+		this.s.cancelButton.click(EditKey.closeWindow);
 		this.s.window.click(function(e) {e.stopPropagation();}); // Stops clicking the window acting like clicking the dark overlay
 	},
 	
 	clearWindow: function() {
-		editKey.s.keyNumDisplay.text('');
-		editKey.s.keyIDDisplay.text('');
-		editKey.s.valueInput.val('');
-		editKey.s.labelInput.val('');
+		EditKey.s.keyNumDisplay.text('');
+		EditKey.s.keyIDDisplay.text('');
+		EditKey.s.valueInput.val('');
+		EditKey.s.labelInput.val('');
 	},
 	
 	closeWindow: function() {
-		editKey.s.overlay.fadeOut(100, editKey.clearWindow);
+		EditKey.s.overlay.fadeOut(100, EditKey.clearWindow);
 	},
 	
 	openWindow: function(keyElement) {
@@ -151,7 +151,7 @@ var editKey = {
 			return;
 		}
 		
-		editKey.s.keyCode = keyCode;
+		EditKey.s.keyCode = keyCode;
 		
 		keyValue = Chomskey.mapKey(keyCode);
 		
@@ -159,23 +159,23 @@ var editKey = {
 			keyValue = '';
 		}
 		
-		editKey.s.keyNumDisplay.text(keyCode);
-		editKey.s.keyIDDisplay.text(keyElement.id);
-		editKey.s.labelInput.val(keyElement.text);
-		editKey.s.valueInput.val(keyValue);
+		EditKey.s.keyNumDisplay.text(keyCode);
+		EditKey.s.keyIDDisplay.text(keyElement.id);
+		EditKey.s.labelInput.val(keyElement.text);
+		EditKey.s.valueInput.val(keyValue);
 		
-		editKey.s.window.fadeIn(100);
-		editKey.s.overlay.fadeIn(100);
+		EditKey.s.window.fadeIn(100);
+		EditKey.s.overlay.fadeIn(100);
 	},
 	
 	saveKey: function() {
-		Chomskey.updateKey(editKey.s.keyCode, editKey.s.valueInput.val(), editKey.s.labelInput.val());
+		Chomskey.updateKey(EditKey.s.keyCode, EditKey.s.valueInput.val(), EditKey.s.labelInput.val());
 		
-		editKey.closeWindow();
+		EditKey.closeWindow();
 	},
 };
 
 $(function() {
 	Chomskey.init();
-	editKey.init();
+	EditKey.init();
 });
