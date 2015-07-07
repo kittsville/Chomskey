@@ -176,6 +176,10 @@ a[type="button"]:active, a[type="button"].pressed {
 	padding: 0px;
 }
 
+#function-keys > .key-group > a:first-of-type {
+	margin-left: 33px;
+}
+
 a#key-backspace {
 	width: 95px;
 }
@@ -184,7 +188,7 @@ a#key-tab {
 	width: 57px;
 }
 
-a#key-caps {
+a#key-caps, a#key-enter {
 	width: 67px;
 }
 
