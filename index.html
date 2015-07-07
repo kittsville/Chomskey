@@ -22,9 +22,40 @@
 	<h3>Dynamic Keyboard Layout Editor</h3>
 	<span id="version">V0.1</span>
 </header>
+
+<!-- Key Editing Window -->
+<div id="edit-key-overlay" class="darken-overlay">
+	<div id="edit-key-window" class="pop">
+		<div id="close-edit-key" class="pop-close"></div>
+		
+		<div>
+			<h2>Editing Key: </h2><h2 id="key-number"></h2>
+		</div>
+		<div>
+			<h4>ID: </h4><h4 id="key-id"></h4>
+		</div>
+		
+		<form id="edit-key">
+			<label for="key-label"><span>Label:</span></label>
+			<input id="key-label" type="text">
+			
+			<label for="key-value"><span>Value:</span></label>
+			<input id="key-value" type="text">
+			
+			<div id="edit-control">
+				<a id="update-key" type="button">Update</a>
+				<a id="cancel-edit" type="button">Cancel</a>
+			</div>
+		</form>
+	</div>
+</div>
+
+<!-- Text goes here -->
 <div id="typing-area">
 	<textarea placeholder="Text goes here"></textarea>
 </div>
+
+<!-- Virtual Keyboard -->
 <div id="keyboard">
 	<div id="top-row">
 		<a id="key-escape" key="27" type="button">Esc</a>
@@ -136,6 +167,8 @@
 	</div>
 	</div>
 </div>
+
+<!-- Load JS last -->
 <div id="foot">
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script type="text/javascript" src="assets/core.js"></script>

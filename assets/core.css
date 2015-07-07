@@ -1,10 +1,11 @@
 body {
 	background-color: #F1F1F1;
+	color: #2F2F2F;
 	margin: 0 2.5%;
 	font-family: Verdana,Helvetica Neue,Helvetica,sans-serif;
 }
 
-header {
+header, .pop {
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
@@ -29,6 +30,134 @@ header {
 	display: inline;
 }
 
+/* Dashicons - Pretty WordPress icons */
+
+@font-face {
+  font-family: 'Dashicons';
+  src: url('fonts/dashicons.eot');
+  src: url('fonts/dashicons.eot?#iefix') format('embedded-opentype'),
+       url('fonts/dashicons.woff') format('woff'),
+       url('fonts/dashicons.ttf')  format('truetype'),
+       url('fonts/dashicons.svg#svgFontName') format('svg');
+}
+
+/* Edit Key Window */
+
+#edit-key-window h2, #edit-key-window h4 {
+	margin: 0px auto;
+	display: inline;
+	clear: right
+}
+
+#edit-key-window span:first-of-type {
+	font-style: italic;
+}
+
+#edit-key-window form {
+	margin-top: 10px;
+}
+
+#edit-key-window input[type='text'] {
+	display: block;
+	clear: left;
+	margin-bottom: 10px;
+}
+
+#edit-control {
+	overflow: auto;
+}
+
+#edit-control #update-key {
+	float: left;
+}
+
+#edit-control #cancel-edit {
+	float: right;
+}
+
+/* Pop-ups (the actually useful kind) */
+
+.darken-overlay {
+	background: rgba(0, 0, 0, 0.6);
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	display: none;
+}
+
+.pop {
+	background: rgba(241, 241, 241, 1);
+	opacity: 1;
+	filter: alpha(opacity=100);
+	border-radius: 6px;
+	padding: 20px;
+	display: inline-block;
+	margin-left: -150px;
+	margin-top: -150px;
+	position: absolute;
+    top: 50%;
+    left: 50%;
+	width: 250px;
+	-webkit-box-shadow: 0px 0px 20px rgba(241, 241, 241, 0.6);
+	-moz-box-shadow: 0px 0px 20px rgba(241, 241, 241, 0.6);
+	box-shadow: 0px 0px 20px rgba(241, 241, 241, 0.6);
+	overflow: hidden;
+	display: none;
+}
+
+.pop-close:before {
+	content: "\f158";
+}
+
+.pop-close:hover {
+	cursor: pointer;
+	background-color: #F1F1F1;
+}
+
+.pop-close {
+	font-family: Dashicons;
+	position: absolute;
+	top: -5px;
+	right: -5px;
+	width: 20px;
+	height: 20px;
+	background: #FFF;
+	padding: 8px;
+	border-radius: 6px;
+	line-height: 27px;
+	font-size: 25px;
+	text-indent: -4px;
+	curosr:
+}
+
+/* Button formatting */
+
+a[type="button"] {
+	background-color: #FCFCFC;
+	color: grey;
+	border-radius: 4px;
+	vertical-align: centre;
+	text-align: center;
+	padding: 5px;
+}
+
+a[type="button"]:link, a[type="button"]:visited, a[type="button"]:hover, a[type="button"]:active {
+    text-decoration: none;
+}
+
+a[type="button"]:hover {
+	cursor: pointer;
+	color: grey;
+	background-color: #e5e5e5;
+}
+
+a[type="button"]:active, a[type="button"].pressed {
+	color: white;
+	background-color: #cccccc;
+}
+
 /* Key Formatting */
 
 #keyboard {
@@ -38,17 +167,13 @@ header {
 
 #keyboard a {
 	display: inline-block;
-	background-color: #FCFCFC;
 	overflow: hidden;
 	line-height: 35px;
-	color: grey;
-	border-radius: 4px;
-	vertical-align: centre;
 	float: left;
     margin: 0 5px 5px 0;
 	height: 42px;
 	width: 38px;
-	text-align: center;
+	padding: 0px;
 }
 
 a#key-backspace {
@@ -73,19 +198,4 @@ a#key-caps {
 
 a#key-backquote, a#key-tab, a#key-caps, a#key-left-shift, a#key-left-control {
 	clear: left;
-}
-
-#keyboard a:link, #keyboard a:visited, #keyboard a:hover, #keyboard a:active {
-    text-decoration: none;
-}
-
-#keyboard a:hover {
-	cursor: pointer;
-	color: grey;
-	background-color: #e5e5e5;
-}
-
-#keyboard a:active, #keyboard a.pressed {
-	color: white;
-	background-color: #cccccc;
 }
