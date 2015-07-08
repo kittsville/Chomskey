@@ -1,3 +1,7 @@
+/**
+ * Chomskey
+ * Handles keypresses and interactions with the virtual keyboard
+ */
 var Chomskey = {
 	// Settings
 	s: {
@@ -105,6 +109,10 @@ var Chomskey = {
 	},
 };
 
+/**
+ * EditKey
+ * Handles interactions with the Key editing window and tells Chomskey to update the key
+ */
 var EditKey = {
 	// Settings
 	s: {
