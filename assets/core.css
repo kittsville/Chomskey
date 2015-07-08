@@ -134,26 +134,27 @@ header, .pop {
 
 /* Button formatting */
 
-a[type="button"] {
+a.button {
 	background-color: #FCFCFC;
 	color: grey;
 	border-radius: 4px;
 	vertical-align: centre;
 	text-align: center;
 	padding: 5px;
+	height: 24px;
 }
 
-a[type="button"]:link, a[type="button"]:visited, a[type="button"]:hover, a[type="button"]:active {
+a.button:link, a.button:visited, a.button:hover, a.button:active {
     text-decoration: none;
 }
 
-a[type="button"]:hover {
+a.button:hover {
 	cursor: pointer;
 	color: grey;
 	background-color: #e5e5e5;
 }
 
-a[type="button"]:active, a[type="button"].pressed {
+a.button:active, a.button.pressed {
 	color: white;
 	background-color: #cccccc;
 }
