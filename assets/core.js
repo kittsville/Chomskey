@@ -96,6 +96,7 @@ var Chomskey = {
 		} else if (Layout.s.currentLayout.map.hasOwnProperty(keyCode)) {
 			delete Layout.s.currentLayout.map[keyCode];
 		}
+		
 		Layout.s.currentLayout.labels[keyCode] = label;
 		
 		var keyElement = Chomskey.mapKeyElement(keyCode);
