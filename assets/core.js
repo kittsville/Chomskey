@@ -91,7 +91,11 @@ var Chomskey = {
 	},
 	
 	updateKey: function(keyCode, value, label) {
-		Layout.s.currentLayout.map[keyCode] = value;
+		if (value) {
+			Layout.s.currentLayout.map[keyCode] = value;
+		} else if (Layout.s.currentLayout.map.hasOwnProperty(keyCode)) {
+			delete Layout.s.currentLayout.map[keyCode];
+		}
 		Layout.s.currentLayout.labels[keyCode] = label;
 		
 		var keyElement = Chomskey.mapKeyElement(keyCode);
