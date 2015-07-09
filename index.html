@@ -56,6 +56,21 @@
 	<textarea placeholder="Text goes here"></textarea>
 </div>
 
+<!-- Keyboard Layout Management -->
+<!-- Managed by JS object 'Layout' -->
+<div id="layout-manager">
+	<select id="layout-selector">
+		<!-- Placeholder until JS initialises -->
+		<option value="default">Default</option>
+	</select>
+	
+	<div id="layout-buttons">
+		<a id="download-layout" class="button">Download</a>
+		<a id="upload-layout" class="button">Upload</a>
+		<input id="real-upload" type="file" accept=".zardoz" style="visibility:hidden;" multiple>
+	</div>
+</div>
+
 <!-- Virtual Keyboard -->
 <!-- Managed by JS object 'Chomskey' -->
 <div id="keyboard">

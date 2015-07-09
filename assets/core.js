@@ -8,7 +8,6 @@ var Chomskey = {
 		keyboardWrap:	$('div#keyboard'),
 		typingArea:		$('div#typing-area textarea'),
 		allowDefaulting:true,							// Whether to default to a key's normal behaviour if no mapping is found
-		keyMap:			{},
 		keyElements:	{},
 		gun:			'good',
 		penis:			'evil',
@@ -59,7 +58,7 @@ var Chomskey = {
 	
 	typeKey: function(event) {
 		var keyCode		= event.which,
-		keyCharacter	= this.mapKey(keyCode);
+		keyCharacter	= Layout.mapKey(keyCode);
 		
 		if (typeof keyCharacter === 'string') {
 			event.preventDefault();
@@ -83,17 +82,6 @@ var Chomskey = {
 		}
 	},
 	
-	// Maps a keycode to the correct character(s) set to display by the keyboard layout
-	mapKey: function(keyCode) {
-		if (this.s.keyMap.hasOwnProperty(keyCode)) {
-			return this.s.keyMap[keyCode];
-		} else {
-			console.log('Unable to find mapping for JS keycode ' + keyCode);
-			
-			return false;
-		}
-	},
-	
 	getKeyCode: function(keyElement) {
 		if (keyElement instanceof $) {
 			return keyElement.prop('key');
@@ -103,9 +91,14 @@ var Chomskey = {
 	},
 	
 	updateKey: function(keyCode, value, label) {
-		Chomskey.s.keyMap[keyCode] = value;
+		Layout.s.currentLayout.map[keyCode] = value;
+		Layout.s.currentLayout.labels[keyCode] = label;
 		
-		Chomskey.mapKeyElement(keyCode).text(label);
+		var keyElement = Chomskey.mapKeyElement(keyCode);
+		
+		if (keyElement) {
+			keyElement.text(label);
+		}
 	},
 };
 
@@ -161,7 +154,7 @@ var EditKey = {
 		
 		EditKey.s.keyCode = keyCode;
 		
-		keyValue = Chomskey.mapKey(keyCode);
+		keyValue = Layout.mapKey(keyCode);
 		
 		if (typeof keyValue !== 'string') {
 			keyValue = '';
@@ -183,7 +176,139 @@ var EditKey = {
 	},
 };
 
+/**
+ * Layout
+ * Allows the user to manage the current keyboard layout
+ */
+var Layout = {
+	// Settings
+	s: {
+		selector:		$('select#layout-selector'),
+		downloadButton:	$('a#download-layout'),
+		uploadButton:	$('a#upload-layout'),
+		uploadField:	$('input#real-upload'),
+		layouts:		{'default':{'name':'Default','v':0.1,'alt':'Your current keyboard layout','slug':'default','map':{},'sMap':{},'altMap':{},'labels':{},'sLabels':{},'altLabels':{}}},
+		currentLayout:	{},
+	},
+	
+	init: function() {
+		this.setCurrentLayout('default');
+		this.bindUIActions();
+	},
+	
+	bindUIActions: function() {
+		this.s.selector.on('change',		Layout.updateSelected);
+		this.s.downloadButton.on('click',	Layout.download);
+		this.s.uploadButton.on('click',		Layout.emulateUploadField);
+		this.s.uploadField.on('change',		Layout.processUpload);
+	},
+	
+	emulateUploadField: function() {
+		Layout.s.uploadField.click();
+	},
+	
+	updateSelected: function(e) {
+		Layout.s.currentLayout = Layout.s.layouts[Layout.s.selector.val()];
+	},
+	
+	download: function() {
+		var filename	= Layout.s.currentLayout.slug + '.zardoz',
+		url				= URL.createObjectURL(new Blob([JSON.stringify(Layout.s.currentLayout)], {type: "application/chomskey"}));
+		
+		Layout.s.downloadButton.attr('download', filename);
+		Layout.s.downloadButton.attr('href', url);
+	},
+	
+	processUpload: function(e) {
+		var file, files = e.target.files;
+		
+		for (var i = 0; i < files.length; i++) {
+			file = files[i];
+			
+			if (file.name.indexOf('.zardoz', file.name.length - 7) === -1) {
+				alert('Skipped ' + file.name + '. Zardoz files only!');
+				continue;
+			}
+			
+			var reader = new FileReader();
+
+			reader.onload = function(e) {
+				try {
+					var parsedJSON = JSON.parse(e.target.result);
+				} catch (error) {
+					alert('Failed to parsed an uploaded file');
+					console.log(error);
+					return;
+				}
+				
+				Layout.processLayout(parsedJSON);
+			};
+
+			reader.readAsText(file);
+		}
+	},
+	
+	processLayout: function(newLayout) {
+		if (!['name', 'v', 'alt', 'slug', 'map', 'sMap', 'altMap', 'labels', 'sLabels', 'altLabels'].every(function(x) {return x in newLayout;})) {
+			var name = '';
+			
+			if (newLayout.hasOwnProperty('name')) {
+				name = newLayout.name;
+			} else {
+				name = 'a new layout';
+			}
+			
+			alert('Failed to add ' + name + ' because of missing layout information');
+		}
+		
+		Layout.addLayout(newLayout);
+		Layout.setCurrentLayout(newLayout.slug);
+	},
+	
+	addLayout: function(newLayout) {
+		Layout.s.layouts[newLayout.slug] = newLayout;
+		Layout.updateSelector();
+	},
+	
+	setCurrentLayout: function(layoutSlug) {
+		Layout.s.currentLayout = Layout.s.layouts[layoutSlug];
+		
+		Layout.s.selector.val(layoutSlug);
+	},
+	
+	mapKey: function(keyCode) {
+		if (Layout.s.currentLayout.map.hasOwnProperty(keyCode)) {
+			return Layout.s.currentLayout.map[keyCode];
+		} else {
+			console.log('Unable to find mapping for JS keycode ' + keyCode);
+			
+			return false;
+		}
+	},
+	
+	updateSelector: function() {
+		Layout.s.selector.empty();
+		
+		var newLayouts = [];
+		
+		$.each(Layout.s.layouts, function(i, layout) {
+			newLayouts.push($('<option/>', {
+				value:	layout.slug,
+				html:	layout.name,
+				title:	layout.alt,
+			}));
+		});
+		
+		Layout.s.selector.append(newLayouts);
+	},
+}
+
 $(function() {
-	Chomskey.init();
-	EditKey.init();
+	if (window.FileReader && window.File) {
+		Chomskey.init();
+		EditKey.init();
+		Layout.init();
+	} else {
+		document.body.innerHTML = 'Your browser is out of date or sucks so this website won\'t work. If you\'re using IE then your browser is out of date AND sucks!';
+	}
 });
