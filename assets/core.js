@@ -116,6 +116,7 @@ var EditKey = {
 	s: {
 		overlay:		$('div#edit-key-overlay'),
 		window:			$('div#edit-key-window'),
+		formInputs:		$('form input[type="text"]'),
 		closeButton:	$('div#close-edit-key'),
 		cancelButton:	$('a#cancel-edit'),
 		updateButton:	$('a#update-key'),
@@ -132,6 +133,7 @@ var EditKey = {
 	
 	bindUIActions: function() {
 		this.s.updateButton.click(EditKey.saveKey);
+		this.s.formInputs.keypress(EditKey.submitOnEnter);
 		
 		this.s.closeButton.click(EditKey.closeWindow);
 		this.s.overlay.click(EditKey.closeWindow);
@@ -172,6 +174,12 @@ var EditKey = {
 		
 		EditKey.s.window.fadeIn(100);
 		EditKey.s.overlay.fadeIn(100);
+	},
+	
+	submitOnEnter: function(e) {
+		if (e.which === 13) {
+			EditKey.s.updateButton.click();
+		}
 	},
 	
 	saveKey: function() {
