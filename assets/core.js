@@ -174,6 +174,8 @@ var EditKey = {
 		
 		EditKey.s.window.fadeIn(100);
 		EditKey.s.overlay.fadeIn(100);
+		
+		EditKey.s.labelInput.focus();
 	},
 	
 	submitOnEnter: function(e) {
