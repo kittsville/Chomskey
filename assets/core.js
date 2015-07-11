@@ -92,10 +92,17 @@ var Chomskey = {
 	},
 	
 	typeKey: function(event) {
-		var keyCode		= event.which,
-		keyCharacter	= Layout.mapKeyToChar(keyCode);
+		var keyCharacter, keyCode = event.which;
 		
-		if (typeof keyCharacter === 'string') {
+		if (Chomskey.s.shift) {
+			keyCharacter = Layout.mapKeyToShiftChar(keyCode);
+		} else if (Chomskey.s.alt) {
+			keyCharacter = Layout.mapKeyToAltChar(keyCode);
+		} else {
+			keyCharacter = Layout.mapKeyToChar(keyCode);
+		}
+		
+		if (keyCharacter !== '') {
 			event.preventDefault();
 			
 			this.s.typingArea.val(this.s.typingArea.val() + keyCharacter);
@@ -279,6 +286,18 @@ var Layout = {
 		return Layout.searchStack(keyCode, [Layout.s.currentLayout.altLabels, Layout.s.defaultAltLabels, Layout.s.currentLayout.labels, Layout.s.defaultLabels]);
 	},
 	
+	mapKeyToChar: function(keyCode) {
+		return Layout.searchStack(keyCode, [Layout.s.currentLayout.map]);
+	},
+	
+	mapKeyToShiftChar: function(keyCode) {
+		return Layout.searchStack(keyCode, [Layout.s.currentLayout.sMap, Layout.s.currentLayout.map]);
+	},
+	
+	mapKeyToAltChar: function(keyCode) {
+		return Layout.searchStack(keyCode, [Layout.s.currentLayout.altMap, Layout.s.currentLayout.map]);
+	},
+	
 	emulateUploadField: function() {
 		Layout.s.uploadField.click();
 	},
@@ -354,16 +373,6 @@ var Layout = {
 		Chomskey.changeCurrentLabels(Layout.mapKeyToLabel);
 		
 		Layout.s.selector.val(layoutSlug);
-	},
-	
-	mapKeyToChar: function(keyCode) {
-		if (Layout.s.currentLayout.map.hasOwnProperty(keyCode)) {
-			return Layout.s.currentLayout.map[keyCode];
-		} else {
-			console.log('Unable to find mapping for JS keycode ' + keyCode);
-			
-			return false;
-		}
 	},
 	
 	updateSelector: function() {
