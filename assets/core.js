@@ -132,21 +132,10 @@ var Chomskey = {
 		}
 	},
 	
-	updateKey: function(keyCode, value, label) {
-		if (value) {
-			Layout.s.currentLayout.map[keyCode] = value;
-		} else if (Layout.s.currentLayout.map.hasOwnProperty(keyCode)) {
-			delete Layout.s.currentLayout.map[keyCode];
-		}
-		
-		Layout.s.currentLayout.labels[keyCode] = label;
-		
-		var keyElement = Chomskey.mapKeyToElement(keyCode);
-		
-		if (keyElement) {
-			keyElement.text(label);
-		}
-	},
+	// Updates the current label of a single key
+	updateKeyLabel: function(keyCode) {
+		Chomskey.mapKeyToElement(keyCode).text(Layout.mapKeyToLabel(keyCode));
+	}
 };
 
 /**
@@ -162,8 +151,12 @@ var EditKey = {
 		closeButton:	$('div#close-edit-key'),
 		cancelButton:	$('a#cancel-edit'),
 		updateButton:	$('a#update-key'),
-		valueInput:		$('input#key-value'),
 		labelInput:		$('input#key-label'),
+		valueInput:		$('input#key-value'),
+		shiftLabelInput:$('input#key-shift-label'),
+		shiftValueInput:$('input#key-shift-value'),
+		altLabelInput:	$('input#key-alt-label'),
+		altValueInput:	$('input#key-alt-value'),
 		keyNumDisplay:	$('h2#key-number'),
 		keyIDDisplay:	$('h4#key-id'),
 		keyCode:		0,
@@ -195,7 +188,7 @@ var EditKey = {
 	},
 	
 	openWindow: function(keyElement) {
-		var keyValue, keyCode = Chomskey.getKeyCode(keyElement);
+		var keyValue, keyShiftValue, keyAltValue, keyCode = Chomskey.getKeyCode(keyElement);
 		
 		if (!keyCode) {
 			return;
@@ -203,12 +196,17 @@ var EditKey = {
 		
 		EditKey.s.keyCode = keyCode;
 		
-		keyValue = Layout.mapKeyToChar(keyCode);
-		
 		EditKey.s.keyNumDisplay.text(keyCode);
 		EditKey.s.keyIDDisplay.text(keyElement.id);
-		EditKey.s.labelInput.val(keyElement.text);
-		EditKey.s.valueInput.val(keyValue);
+		
+		EditKey.s.labelInput.val(Layout.mapKeyToLabel(keyCode));
+		EditKey.s.valueInput.val(Layout.mapKeyToChar(keyCode));
+		
+		EditKey.s.shiftLabelInput.val(Layout.mapKeyToShiftLabel(keyCode));
+		EditKey.s.shiftValueInput.val(Layout.mapKeyToShiftChar(keyCode));
+		
+		EditKey.s.shiftLabelInput.val(Layout.mapKeyToAltLabel(keyCode));
+		EditKey.s.altValueInput.val(Layout.mapKeyToAltChar(keyCode));
 		
 		EditKey.s.window.fadeIn(100);
 		EditKey.s.overlay.fadeIn(100);
@@ -223,7 +221,11 @@ var EditKey = {
 	},
 	
 	saveKey: function() {
-		Chomskey.updateKey(EditKey.s.keyCode, EditKey.s.valueInput.val(), EditKey.s.labelInput.val());
+		Layout.updateKey(EditKey.s.keyCode,
+		EditKey.s.labelInput.val(),		EditKey.s.valueInput.val(),
+		EditKey.s.shiftLabelInput.val(),EditKey.s.shiftValueInput.val(),
+		EditKey.s.altLabelInput.val(),	EditKey.s.altValueInput.val()
+		);
 		
 		EditKey.closeWindow();
 	},
@@ -369,6 +371,25 @@ var Layout = {
 		Chomskey.changeCurrentLabels(Layout.mapKeyToLabel);
 		
 		Layout.s.selector.val(layoutSlug);
+	},
+	
+	updateKey: function(keyCode, label, value, shiftLabel, shiftValue, altLabel, altValue) {
+		$.each({
+			'map':		value,
+			'labels':	label,
+			'sMap':		shiftValue,
+			'sLabels':	shiftLabel,
+			'altMap':	altValue,
+			'altLabels':altLabel,
+		}, function(layoutKey, layoutValue) {
+			delete Layout.s.currentLayout[layoutKey][keyCode];
+			
+			if (layoutValue !== '') {
+				Layout.s.currentLayout[layoutKey][keyCode] = layoutValue;
+			}
+		});
+		
+		Chomskey.updateKeyLabel(keyCode);
 	},
 	
 	updateSelector: function() {
