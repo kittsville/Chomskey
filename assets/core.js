@@ -381,6 +381,16 @@ var Layout = {
 		Layout.s.selector.val(layoutSlug);
 	},
 	
+	loadLocalLayout: function(layoutName) {
+		$.ajax({
+			url:		'assets/layouts/' + layoutName + '.zardoz',
+			cache:		true,
+			dataType:	'json',
+		}).success(function(newLayout) {
+			Layout.addLayout(newLayout);
+		});
+	},
+	
 	updateKey: function(keyCode, label, value, shiftLabel, shiftValue, altLabel, altValue) {
 		$.each({
 			'map':		value,
