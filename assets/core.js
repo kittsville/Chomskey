@@ -252,6 +252,7 @@ var Layout = {
 	init: function() {
 		this.setCurrentLayout('default');
 		this.bindUIActions();
+		this.loadLocalLayout('ucl-ipa');
 	},
 	
 	bindUIActions: function() {
