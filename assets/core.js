@@ -205,7 +205,7 @@ var EditKey = {
 		EditKey.s.shiftLabelInput.val(Layout.searchCurrentLayout(keyCode, 'sLabels'));
 		EditKey.s.shiftValueInput.val(Layout.searchCurrentLayout(keyCode, 'sMap'));
 		
-		EditKey.s.shiftLabelInput.val(Layout.searchCurrentLayout(keyCode, 'altLabels'));
+		EditKey.s.altLabelInput.val(Layout.searchCurrentLayout(keyCode, 'altLabels'));
 		EditKey.s.altValueInput.val(Layout.searchCurrentLayout(keyCode, 'altMap'));
 		
 		EditKey.s.window.fadeIn(100);
