@@ -107,6 +107,17 @@ header, .pop {
 	display: none;
 }
 
+.pop input[type="text"] {
+	border: solid 1px #DBD9D9;
+	border-radius: 3px;
+	padding: 5px;
+	width: 80%;
+}
+
+.pop input[type="text"]:focus {
+	box-shadow: 0 0 5px 1px #DBD9D9;
+}
+
 .pop-close:before {
 	content: "\f158";
 }
