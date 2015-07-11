@@ -256,11 +256,11 @@ var Layout = {
 		this.s.uploadField.on('change',		Layout.processUpload);
 	},
 	
-	// Finds the highest priority label for a keyCode
-	searchLabelStack: function(keyCode, labelStack) {
-		for (var i = 0; i < labelStack.length; i++) {
-			if (labelStack[i].hasOwnProperty(keyCode)) {
-				return labelStack[i][keyCode];
+	// Finds the highest priority label/value for a keyCode
+	searchStack: function(keyCode, stack) {
+		for (var i = 0; i < stack.length; i++) {
+			if (stack[i].hasOwnProperty(keyCode)) {
+				return stack[i][keyCode];
 			}
 		}
 		
@@ -268,15 +268,15 @@ var Layout = {
 	},
 	
 	mapKeyToLabel: function(keyCode) {
-		return Layout.searchLabelStack(keyCode, [Layout.s.currentLayout.labels, Layout.s.defaultLabels]);
+		return Layout.searchStack(keyCode, [Layout.s.currentLayout.labels, Layout.s.defaultLabels]);
 	},
 	
 	mapKeyToShiftLabel: function(keyCode) {
-		return Layout.searchLabelStack(keyCode, [Layout.s.currentLayout.sLabels, Layout.s.defaultShiftLabels, Layout.s.currentLayout.labels, Layout.s.defaultLabels]);
+		return Layout.searchStack(keyCode, [Layout.s.currentLayout.sLabels, Layout.s.defaultShiftLabels, Layout.s.currentLayout.labels, Layout.s.defaultLabels]);
 	},
 	
 	mapKeyToAltLabel: function(keyCode) {
-		return Layout.searchLabelStack(keyCode, [Layout.s.currentLayout.altLabels, Layout.s.defaultAltLabels, Layout.s.currentLayout.labels, Layout.s.defaultLabels]);
+		return Layout.searchStack(keyCode, [Layout.s.currentLayout.altLabels, Layout.s.defaultAltLabels, Layout.s.currentLayout.labels, Layout.s.defaultLabels]);
 	},
 	
 	emulateUploadField: function() {
