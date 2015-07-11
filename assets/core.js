@@ -205,10 +205,6 @@ var EditKey = {
 		
 		keyValue = Layout.mapKeyToChar(keyCode);
 		
-		if (typeof keyValue !== 'string') {
-			keyValue = '';
-		}
-		
 		EditKey.s.keyNumDisplay.text(keyCode);
 		EditKey.s.keyIDDisplay.text(keyElement.id);
 		EditKey.s.labelInput.val(keyElement.text);
