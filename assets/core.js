@@ -9,6 +9,8 @@ var Chomskey = {
 		typingArea:		$('div#typing-area textarea'),
 		allowDefaulting:true,							// Whether to default to a key's normal behaviour if no mapping is found
 		keyElements:	{},
+		shift:			false,
+		alt:			false,
 		gun:			'good',
 		penis:			'evil',
 	},
@@ -29,10 +31,12 @@ var Chomskey = {
 		this.s.typingArea.keydown(function(event) {
 			Chomskey.highlightKey(event.which);
 			Chomskey.typeKey(event);
+			Chomskey.updateLabels(event);
 		});
 		
 		this.s.typingArea.keyup(function(event) {
 			Chomskey.unhighlightKey(event.which);
+			Chomskey.updateLabels(event);
 		});
 		
 		this.s.keyboardWrap.on('click', 'a', function(event) {
@@ -41,7 +45,7 @@ var Chomskey = {
 	},
 	
 	highlightKey: function(keyCode) {
-		var keyElement = Chomskey.mapKeyElement(keyCode);
+		var keyElement = Chomskey.mapKeyToElement(keyCode);
 
 		if (keyElement) {
 			keyElement.addClass('pressed');
@@ -49,16 +53,47 @@ var Chomskey = {
 	},
 	
 	unhighlightKey: function(keyCode) {
-		var keyElement = Chomskey.mapKeyElement(keyCode);
+		var keyElement = Chomskey.mapKeyToElement(keyCode);
 
 		if (keyElement) {
 			keyElement.removeClass('pressed');
 		}
 	},
 	
+	changeCurrentLabels: function(labelMapper) {
+		$.each(Chomskey.s.keyElements, function(i, keyElement) {
+			keyElement.text(labelMapper(keyElement.attr('key')));
+		});
+	},
+	
+	updateLabels: function(event) {
+		switch (event.type) {
+			case 'keydown':
+				if (event.which === 16 && Chomskey.s.shift === false) {
+					Chomskey.s.shift = true;
+					
+					Chomskey.changeCurrentLabels(Layout.mapKeyToShiftLabel);
+				} else if (event.which === 18 && event.ctrlKey && Chomskey.s.alt === false ) {
+					Chomskey.s.alt = true;
+					
+					Chomskey.changeCurrentLabels(Layout.mapKeyToAltLabel);
+				}
+			break;
+			
+			case 'keyup':
+				if ((event.which === 16 && Chomskey.s.shift === true) || (event.which === 18 && Chomskey.s.alt === true)) {
+					Chomskey.s.shift	= false;
+					Chomskey.s.alt		= false;
+					
+					Chomskey.changeCurrentLabels(Layout.mapKeyToLabel);
+				}
+			break;
+		}
+	},
+	
 	typeKey: function(event) {
 		var keyCode		= event.which,
-		keyCharacter	= Layout.mapKey(keyCode);
+		keyCharacter	= Layout.mapKeyToChar(keyCode);
 		
 		if (typeof keyCharacter === 'string') {
 			event.preventDefault();
@@ -72,7 +107,7 @@ var Chomskey = {
 	},
 	
 	// Maps a keycode to the HTML element for that key
-	mapKeyElement: function(keyCode) {
+	mapKeyToElement: function(keyCode) {
 		if (this.s.keyElements.hasOwnProperty(keyCode)) {
 			return this.s.keyElements[keyCode];
 		} else {
@@ -99,7 +134,7 @@ var Chomskey = {
 		
 		Layout.s.currentLayout.labels[keyCode] = label;
 		
-		var keyElement = Chomskey.mapKeyElement(keyCode);
+		var keyElement = Chomskey.mapKeyToElement(keyCode);
 		
 		if (keyElement) {
 			keyElement.text(label);
@@ -161,7 +196,7 @@ var EditKey = {
 		
 		EditKey.s.keyCode = keyCode;
 		
-		keyValue = Layout.mapKey(keyCode);
+		keyValue = Layout.mapKeyToChar(keyCode);
 		
 		if (typeof keyValue !== 'string') {
 			keyValue = '';
@@ -198,12 +233,15 @@ var EditKey = {
 var Layout = {
 	// Settings
 	s: {
-		selector:		$('select#layout-selector'),
-		downloadButton:	$('a#download-layout'),
-		uploadButton:	$('a#upload-layout'),
-		uploadField:	$('input#real-upload'),
-		layouts:		{'default':{'name':'Default','v':0.1,'alt':'Your current keyboard layout','slug':'default','map':{},'sMap':{},'altMap':{},'labels':{},'sLabels':{},'altLabels':{}}},
-		currentLayout:	{},
+		selector:			$('select#layout-selector'),
+		downloadButton:		$('a#download-layout'),
+		uploadButton:		$('a#upload-layout'),
+		uploadField:		$('input#real-upload'),
+		layouts:			{'default':{'name':'Default','v':0.1,'alt':'Your current keyboard layout','slug':'default','map':{},'sMap':{},'altMap':{},'labels':{},'sLabels':{},'altLabels':{}}},
+		currentLayout:		{},
+		defaultLabels:		{"8":"Backspace","9":"Tab","13":"Enter","16":"Shift","17":"Ctrl","18":"Alt","20":"Caps","27":"Esc","32":"Space","48":"0","49":"1","50":"2","51":"3","52":"4","53":"5","54":"6","55":"7","56":"8","57":"9","59":";","61":"=","65":"a","66":"b","67":"c","68":"d","69":"e","70":"f","71":"g","72":"h","73":"i","74":"j","75":"k","76":"l","77":"m","78":"n","79":"o","80":"p","81":"q","82":"r","83":"s","84":"t","85":"u","86":"v","87":"w","88":"x","89":"y","90":"z","91":"Start","93":"Select","112":"F1","113":"F2","114":"F3","115":"F4","116":"F5","117":"F6","118":"F7","119":"F8","120":"F9","121":"F10","122":"F11","123":"F12","163":"#","173":"-","188":",","190":".","191":"/","192":"`","219":"[","220":"\\","221":"]","222":"'"},
+		defaultShiftLabels:	{"48":")","49":"!","50":"\"","51":"£","52":"$","53":"%","54":"^","55":"&","56":"*","57":"(","59":":","61":"+","65":"A","66":"B","67":"C","68":"D","69":"E","70":"F","71":"G","72":"H","73":"I","74":"J","75":"K","76":"L","77":"M","78":"N","79":"O","80":"P","81":"Q","82":"R","83":"S","84":"T","85":"U","86":"V","87":"W","88":"X","89":"Y","90":"Z","163":"~","173":"_","188":"<","190":">","191":"?","192":"¬","219":"{","220":"|","221":"}","222":"@"},
+		defaultAltLabels:	{"52":"€","192":"¦"},
 	},
 	
 	init: function() {
@@ -218,12 +256,37 @@ var Layout = {
 		this.s.uploadField.on('change',		Layout.processUpload);
 	},
 	
+	// Finds the highest priority label for a keyCode
+	searchLabelStack: function(keyCode, labelStack) {
+		for (var i = 0; i < labelStack.length; i++) {
+			if (labelStack[i].hasOwnProperty(keyCode)) {
+				return labelStack[i][keyCode];
+			}
+		}
+		
+		return '';
+	},
+	
+	mapKeyToLabel: function(keyCode) {
+		return Layout.searchLabelStack(keyCode, [Layout.s.currentLayout.labels, Layout.s.defaultLabels]);
+	},
+	
+	mapKeyToShiftLabel: function(keyCode) {
+		return Layout.searchLabelStack(keyCode, [Layout.s.currentLayout.sLabels, Layout.s.defaultShiftLabels, Layout.s.currentLayout.labels, Layout.s.defaultLabels]);
+	},
+	
+	mapKeyToAltLabel: function(keyCode) {
+		return Layout.searchLabelStack(keyCode, [Layout.s.currentLayout.altLabels, Layout.s.defaultAltLabels, Layout.s.currentLayout.labels, Layout.s.defaultLabels]);
+	},
+	
 	emulateUploadField: function() {
 		Layout.s.uploadField.click();
 	},
 	
 	updateSelected: function(e) {
 		Layout.s.currentLayout = Layout.s.layouts[Layout.s.selector.val()];
+		
+		Chomskey.changeCurrentLabels(Layout.mapKeyToLabel);
 	},
 	
 	download: function() {
@@ -288,10 +351,12 @@ var Layout = {
 	setCurrentLayout: function(layoutSlug) {
 		Layout.s.currentLayout = Layout.s.layouts[layoutSlug];
 		
+		Chomskey.changeCurrentLabels(Layout.mapKeyToLabel);
+		
 		Layout.s.selector.val(layoutSlug);
 	},
 	
-	mapKey: function(keyCode) {
+	mapKeyToChar: function(keyCode) {
 		if (Layout.s.currentLayout.map.hasOwnProperty(keyCode)) {
 			return Layout.s.currentLayout.map[keyCode];
 		} else {
