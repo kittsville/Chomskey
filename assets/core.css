@@ -2,11 +2,11 @@ body {
 	background-color: #F1F1F1;
 	color: #2F2F2F;
 	margin: 0 2.5%;
-	font-family: Verdana,Helvetica Neue,Helvetica,sans-serif;
+	font-family: "Lucida Grande", "Lucida Sans Unicode", sans-serif;
 }
 
 header, .pop {
-	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-family: "Lucida Grande", "Lucida Sans Unicode", sans-serif;
 }
 
 #typing-area textarea {
@@ -112,6 +112,7 @@ header, .pop {
 	border-radius: 3px;
 	padding: 5px;
 	width: 80%;
+	font-family: Arial, Arial Unicode MS, sans-serif;
 }
 
 .pop input[type="text"]:focus {
