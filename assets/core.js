@@ -297,11 +297,11 @@ var Layout = {
 	},
 	
 	mapKeyToShiftChar: function(keyCode) {
-		return Layout.searchStack(keyCode, [Layout.s.currentLayout.sMap, Layout.s.currentLayout.map]);
+		return Layout.searchStack(keyCode, [Layout.s.currentLayout.sMap]);
 	},
 	
 	mapKeyToAltChar: function(keyCode) {
-		return Layout.searchStack(keyCode, [Layout.s.currentLayout.altMap, Layout.s.currentLayout.map]);
+		return Layout.searchStack(keyCode, [Layout.s.currentLayout.altMap]);
 	},
 	
 	emulateUploadField: function() {
