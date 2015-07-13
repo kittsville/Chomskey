@@ -384,7 +384,7 @@ var Layout = {
 	
 	loadLocalLayout: function(layoutName) {
 		$.ajax({
-			url:		'assets/layouts/' + layoutName + '.zardoz',
+			url:		'layouts/' + layoutName + '.zardoz',
 			cache:		true,
 			dataType:	'json',
 		}).success(function(newLayout) {
