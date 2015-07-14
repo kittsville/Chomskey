@@ -17,8 +17,6 @@ header, .pop {
 	background: #FCFCFC;
 	border: 1px solid #f9f9f9;
 	border-radius: 5px;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
 	resize: none;
 }
 
