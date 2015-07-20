@@ -10,8 +10,6 @@ var Keyboard = {
 		keyElements:	{},
 		shift:			false,
 		alt:			false,
-		gun:			'good',
-		penis:			'evil',
 	},
 	
 	init: function() {
