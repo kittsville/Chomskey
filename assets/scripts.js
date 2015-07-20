@@ -91,6 +91,10 @@ var Chomskey = {
 	},
 	
 	typeKey: function(event) {
+		if (event.ctrlKey) {
+			return;
+		}
+		
 		var keyCharacter, keyCode = event.which;
 		
 		if (Chomskey.s.shift) {
@@ -105,8 +109,6 @@ var Chomskey = {
 			event.preventDefault();
 			
 			this.s.typingArea.val(this.s.typingArea.val() + keyCharacter);
-		} else {
-			return;
 		}
 	},
 	
