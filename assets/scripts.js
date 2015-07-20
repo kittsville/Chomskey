@@ -1,4 +1,14 @@
 /**
+ * Holds general application settings
+ */
+var Chomskey = {
+	// Settings
+	s: {
+		version: '0.1',
+	},
+};
+
+/**
  * Keyboard
  * Handles keypresses and interactions with the virtual keyboard
  */
