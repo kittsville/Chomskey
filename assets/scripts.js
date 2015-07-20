@@ -372,6 +372,11 @@ var Layout = {
 			alert('Failed to add ' + name + ' because of missing layout information');
 		}
 		
+		if (Chomskey.s.version != newLayout.v) {
+			alert('Layout ' +  newLayout.name + ' (version ' + newLayout.v + ') incompatible with Chomskey (version ' + Chomskey.s.version + ')');
+			return;
+		}
+		
 		Layout.addLayout(newLayout);
 		Layout.setCurrentLayout(newLayout.slug);
 	},
