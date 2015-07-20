@@ -1,8 +1,8 @@
 /**
- * Chomskey
+ * Keyboard
  * Handles keypresses and interactions with the virtual keyboard
  */
-var Chomskey = {
+var Keyboard = {
 	// Settings
 	s: {
 		keyboardWrap:	$('div#keyboard'),
@@ -16,10 +16,10 @@ var Chomskey = {
 	
 	init: function() {
 		this.s.keyboardWrap.find('a').each(function(i, key) {
-			var keyCode = Chomskey.getKeyCode(key);
+			var keyCode = Keyboard.getKeyCode(key);
 			
 			if (keyCode) {
-				Chomskey.s.keyElements[keyCode] = $(key);
+				Keyboard.s.keyElements[keyCode] = $(key);
 			}
 		});
 		
@@ -28,14 +28,14 @@ var Chomskey = {
 	
 	bindUIActions: function() {
 		this.s.typingArea.keydown(function(event) {
-			Chomskey.highlightKey(event.which);
-			Chomskey.typeKey(event);
-			Chomskey.updateLabels(event);
+			Keyboard.highlightKey(event.which);
+			Keyboard.typeKey(event);
+			Keyboard.updateLabels(event);
 		});
 		
 		this.s.typingArea.keyup(function(event) {
-			Chomskey.unhighlightKey(event.which);
-			Chomskey.updateLabels(event);
+			Keyboard.unhighlightKey(event.which);
+			Keyboard.updateLabels(event);
 		});
 		
 		this.s.keyboardWrap.on('click', 'a', function(event) {
@@ -44,7 +44,7 @@ var Chomskey = {
 	},
 	
 	highlightKey: function(keyCode) {
-		var keyElement = Chomskey.mapKeyToElement(keyCode);
+		var keyElement = Keyboard.mapKeyToElement(keyCode);
 
 		if (keyElement) {
 			keyElement.addClass('pressed');
@@ -52,7 +52,7 @@ var Chomskey = {
 	},
 	
 	unhighlightKey: function(keyCode) {
-		var keyElement = Chomskey.mapKeyToElement(keyCode);
+		var keyElement = Keyboard.mapKeyToElement(keyCode);
 
 		if (keyElement) {
 			keyElement.removeClass('pressed');
@@ -60,7 +60,7 @@ var Chomskey = {
 	},
 	
 	changeCurrentLabels: function(labelMapper) {
-		$.each(Chomskey.s.keyElements, function(i, keyElement) {
+		$.each(Keyboard.s.keyElements, function(i, keyElement) {
 			keyElement.text(labelMapper(keyElement.attr('key')));
 		});
 	},
@@ -68,23 +68,23 @@ var Chomskey = {
 	updateLabels: function(event) {
 		switch (event.type) {
 			case 'keydown':
-				if (event.which === 16 && Chomskey.s.shift === false) {
-					Chomskey.s.shift = true;
+				if (event.which === 16 && Keyboard.s.shift === false) {
+					Keyboard.s.shift = true;
 					
-					Chomskey.changeCurrentLabels(Layout.mapKeyToShiftLabel);
-				} else if (event.which === 18 && event.ctrlKey && Chomskey.s.alt === false ) {
-					Chomskey.s.alt = true;
+					Keyboard.changeCurrentLabels(Layout.mapKeyToShiftLabel);
+				} else if (event.which === 18 && event.ctrlKey && Keyboard.s.alt === false ) {
+					Keyboard.s.alt = true;
 					
-					Chomskey.changeCurrentLabels(Layout.mapKeyToAltLabel);
+					Keyboard.changeCurrentLabels(Layout.mapKeyToAltLabel);
 				}
 			break;
 			
 			case 'keyup':
-				if ((event.which === 16 && Chomskey.s.shift === true) || (event.which === 18 && Chomskey.s.alt === true)) {
-					Chomskey.s.shift	= false;
-					Chomskey.s.alt		= false;
+				if ((event.which === 16 && Keyboard.s.shift === true) || (event.which === 18 && Keyboard.s.alt === true)) {
+					Keyboard.s.shift	= false;
+					Keyboard.s.alt		= false;
 					
-					Chomskey.changeCurrentLabels(Layout.mapKeyToLabel);
+					Keyboard.changeCurrentLabels(Layout.mapKeyToLabel);
 				}
 			break;
 		}
@@ -97,9 +97,9 @@ var Chomskey = {
 		
 		var keyCharacter, keyCode = event.which;
 		
-		if (Chomskey.s.shift) {
+		if (Keyboard.s.shift) {
 			keyCharacter = Layout.mapKeyToShiftChar(keyCode);
-		} else if (Chomskey.s.alt) {
+		} else if (Keyboard.s.alt) {
 			keyCharacter = Layout.mapKeyToAltChar(keyCode);
 		} else {
 			keyCharacter = Layout.mapKeyToChar(keyCode);
@@ -133,13 +133,13 @@ var Chomskey = {
 	
 	// Updates the current label of a single key
 	updateKeyLabel: function(keyCode) {
-		Chomskey.mapKeyToElement(keyCode).text(Layout.mapKeyToLabel(keyCode));
+		Keyboard.mapKeyToElement(keyCode).text(Layout.mapKeyToLabel(keyCode));
 	}
 };
 
 /**
  * EditKey
- * Handles interactions with the Key editing window and tells Chomskey to update the key
+ * Handles interactions with the Key editing window and tells Keyboard to update the key
  */
 var EditKey = {
 	// Settings
@@ -187,7 +187,7 @@ var EditKey = {
 	},
 	
 	openWindow: function(keyElement) {
-		var keyValue, keyShiftValue, keyAltValue, keyCode = Chomskey.getKeyCode(keyElement);
+		var keyValue, keyShiftValue, keyAltValue, keyCode = Keyboard.getKeyCode(keyElement);
 		
 		if (!keyCode) {
 			return;
@@ -311,12 +311,12 @@ var Layout = {
 	updateSelected: function(e) {
 		Layout.s.currentLayout = Layout.s.layouts[Layout.s.selector.val()];
 		
-		Chomskey.changeCurrentLabels(Layout.mapKeyToLabel);
+		Keyboard.changeCurrentLabels(Layout.mapKeyToLabel);
 	},
 	
 	download: function() {
 		var filename	= Layout.s.currentLayout.slug + '.zardoz',
-		url				= URL.createObjectURL(new Blob([JSON.stringify(Layout.s.currentLayout)], {type: "application/chomskey"}));
+		url				= URL.createObjectURL(new Blob([JSON.stringify(Layout.s.currentLayout)], {type: "application/Keyboard"}));
 		
 		Layout.s.downloadButton.attr('download', filename);
 		Layout.s.downloadButton.attr('href', url);
@@ -376,7 +376,7 @@ var Layout = {
 	setCurrentLayout: function(layoutSlug) {
 		Layout.s.currentLayout = Layout.s.layouts[layoutSlug];
 		
-		Chomskey.changeCurrentLabels(Layout.mapKeyToLabel);
+		Keyboard.changeCurrentLabels(Layout.mapKeyToLabel);
 		
 		Layout.s.selector.val(layoutSlug);
 	},
@@ -407,7 +407,7 @@ var Layout = {
 			}
 		});
 		
-		Chomskey.updateKeyLabel(keyCode);
+		Keyboard.updateKeyLabel(keyCode);
 	},
 	
 	updateSelector: function() {
@@ -429,7 +429,7 @@ var Layout = {
 
 $(function() {
 	if (window.FileReader && window.File) {
-		Chomskey.init();
+		Keyboard.init();
 		EditKey.init();
 		Layout.init();
 	} else {
