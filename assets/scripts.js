@@ -7,7 +7,6 @@ var Chomskey = {
 	s: {
 		keyboardWrap:	$('div#keyboard'),
 		typingArea:		$('div#typing-area textarea'),
-		allowDefaulting:true,							// Whether to default to a key's normal behaviour if no mapping is found
 		keyElements:	{},
 		shift:			false,
 		alt:			false,
@@ -106,11 +105,9 @@ var Chomskey = {
 			event.preventDefault();
 			
 			this.s.typingArea.val(this.s.typingArea.val() + keyCharacter);
-		} else if (this.s.allowDefaulting) {
+		} else {
 			return;
 		}
-		
-		event.preventDefault();
 	},
 	
 	// Maps a keycode to the HTML element for that key
