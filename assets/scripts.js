@@ -1,3 +1,7 @@
+if (typeof $ === 'undefined') {
+	document.body.innerHTML = '<p>Failed to load jQuery. Nothing will work. Please <a href="mailto:kittsville@gmail.com">shout at developer.</a></p>';
+}
+
 /**
  * Holds general application settings
  */
@@ -5,6 +9,20 @@ var Chomskey = {
 	// Settings
 	s: {
 		version: '0.1',
+	},
+	
+	// Handles necessary components not existing (jQuery, File API, etc.)
+	init: function() {
+		Keyboard.init();
+		EditKey.init();
+		Layout.init();
+		
+		if (typeof Blob === 'undefined') {
+			Layout.disableDownload();
+			Layout.disableUpload();
+		} else if (typeof FileReader === 'undefined') {
+			Layout.disableUpload();
+		}
 	},
 };
 
@@ -438,14 +456,16 @@ var Layout = {
 		
 		Layout.s.selector.append(newLayouts);
 	},
+	
+	disableUpload: function() {
+		Layout.s.uploadButton.hide();
+	},
+	
+	disableDownload: function() {
+		Layout.s.downloadButton.hide();
+	},
 }
 
 $(function() {
-	if (window.FileReader && window.File) {
-		Keyboard.init();
-		EditKey.init();
-		Layout.init();
-	} else {
-		document.body.innerHTML = 'Your browser is out of date or sucks so this website won\'t work. If you\'re using IE then your browser is out of date AND sucks!';
-	}
+	Chomskey.init();
 });
