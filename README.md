@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/kittsville/Chomskey/master/assets/logo.png" />
+</p>
+
 # Chomskey - The Online Keyboard Layout
 
 >Chomsky speaks to you, his chosen ones
