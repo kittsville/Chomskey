@@ -18,6 +18,7 @@ header, .pop {
 	border: 1px solid #f9f9f9;
 	border-radius: 5px;
 	resize: none;
+	max-width: 800px;
 }
 
 .keyboard-row a {
