@@ -1,12 +1,23 @@
 body {
 	background-color: #F1F1F1;
 	color: #2F2F2F;
-	margin: 0 2.5%;
 	font-family: "Lucida Grande", "Lucida Sans Unicode", sans-serif;
+}
+
+div#container {
+	margin: 0 2.5%;
 }
 
 header, .pop {
 	font-family: "Lucida Grande", "Lucida Sans Unicode", sans-serif;
+}
+
+header {
+	margin-left: 10px;
+}
+
+img#logo {
+	margin-left: 150px;
 }
 
 #typing-area textarea {
