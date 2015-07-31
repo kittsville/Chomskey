@@ -1,6 +1,8 @@
 # Chomskey - The Online Keyboard Layout
 
-<img align="middle" src="https://raw.githubusercontent.com/kittsville/Chomskey/master/assets/logo.png" />
+<p align="center">
+  <img src="https://raw.githubusercontent.com/kittsville/Chomskey/master/assets/logo.png" />
+</p>
 
 >Chomsky speaks to you, his chosen ones
 
