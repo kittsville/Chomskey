@@ -1,5 +1,7 @@
 # Chomskey - The Online Keyboard Layout
 
+<img align="middle" src="https://raw.githubusercontent.com/kittsville/Chomskey/master/assets/logo.png" />
+
 >Chomsky speaks to you, his chosen ones
 
 Can't install a keyboard layout on your system? Have no fear! Chomskey allows you to create a custom keyboard layout (or choose from common layouts) then type away!
