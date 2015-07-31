@@ -2,7 +2,7 @@
   <img src="https://raw.githubusercontent.com/kittsville/Chomskey/master/assets/logo.png" />
 </p>
 
-# Chomskey - The Online Keyboard Layout
+# Chomskey - Online Keyboard Layouts
 
 >Chomsky speaks to you, his chosen ones
 
