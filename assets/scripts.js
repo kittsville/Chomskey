@@ -134,7 +134,7 @@ var Keyboard = {
 		if (keyCharacter !== '') {
 			event.preventDefault();
 			
-			this.s.typingArea.val(this.s.typingArea.val() + keyCharacter);
+			this.s.typingArea.insertAtCaret(keyCharacter);
 		}
 	},
 	
