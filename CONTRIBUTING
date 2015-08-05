@@ -1,0 +1,15 @@
+To contribute to Chomskey you'll need a web stack. You won't need a database but
+you'll need something to respond to HTTP requests. I've always used XAMP on
+Windows because it's idiot (me) proof but if you use Linux you may well have Apache
+packaged with your install. Just follow any instructions on setting up a site via
+your preferred stack and dump Chomskey in your htdocs/html_public directory.
+
+If you're getting the no jQuery error then most likely:
+1. You didn't read the above paragraph.
+2. You need to allow Cross-domain Requests to Google's CDN so jQuery can be loaded.
+   Read up on CORS - it's interesting stuff.
+I'm open to pestering at kittsville@gmail.com with Chomskey related problems
+but do try to Google things first.
+
+If you're curious about the Chomsky/Zardoz stuff all over this app then check out
+/r/badlinguistics or watch the film Zardoz (1974).
