@@ -1,5 +1,10 @@
 if (typeof $ === 'undefined') {
 	document.body.innerHTML = '<p>Failed to load jQuery. Nothing will work. Please <a href="mailto:kittsville@gmail.com">shout at developer.</a></p>';
+	
+	// Warns people about not using a web stack
+	if (window.location.protocol !== 'https:' && window.location.protocol !== 'http:') {
+		document.body.innerHTML += '<p>Try running Chomskey from a proper web stack. Opening index.html in your browser is not the same.</p>';
+	}
 }
 
 /**
