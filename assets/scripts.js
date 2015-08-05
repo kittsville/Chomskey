@@ -1,5 +1,5 @@
 if (typeof $ === 'undefined') {
-	document.body.innerHTML = '<p>Failed to load jQuery. Nothing will work. Please <a href="mailto:kittsville@gmail.com">shout at developer.</a></p>';
+	document.body.innerHTML = '<p>Failed to load jQuery. Nothing will work. Please <a href="mailto:kittsville@gmail.com">shout at developer.</a> or check for network issues.</p>';
 	
 	// Warns people about not using a web stack
 	if (window.location.protocol !== 'https:' && window.location.protocol !== 'http:') {
