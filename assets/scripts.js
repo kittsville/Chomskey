@@ -396,7 +396,7 @@ var Layout = {
 		}
 		
 		if (Chomskey.s.version != newLayout.v) {
-			alert('Layout ' +  newLayout.name + ' (version ' + newLayout.v + ') incompatible with Chomskey (version ' + Chomskey.s.version + ')');
+			alert('Layout ' +	newLayout.name + ' (version ' + newLayout.v + ') incompatible with Chomskey (version ' + Chomskey.s.version + ')');
 			return;
 		}
 		
