@@ -412,11 +412,8 @@ var Layout = {
 	},
 	
 	setCurrentLayout: function(layoutSlug) {
-		Layout.s.currentLayout = Layout.s.layouts[layoutSlug];
-		
-		Keyboard.changeCurrentLabels(Layout.mapKeyToLabel);
-		
 		Layout.s.selector.val(layoutSlug);
+		Layout.s.selector.trigger('change');
 	},
 	
 	loadLocalLayout: function(layoutName) {
