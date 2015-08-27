@@ -137,16 +137,18 @@ var Keyboard = {
 			keyCharacter = Layout.mapKeyToChar(keyCode);
 		}
 		
-		if (keyCharacter !== '') {
-			event.preventDefault();
-			
-			if (keyCharacter.match(this.s.combiningCharacterRegex)) {
-				this.s.typingArea.insertAtCaret(keyCharacter, -1);
-			} else {
-				this.s.typingArea.insertAtCaret(keyCharacter);
-			}
+		if (keyCharacter === '') {
+			return;
 		}
-	},
+		
+		event.preventDefault();
+		
+		if (keyCharacter.match(this.s.combiningCharacterRegex)) {
+			this.s.typingArea.insertAtCaret(keyCharacter, -1);
+		} else {
+			this.s.typingArea.insertAtCaret(keyCharacter);
+		}
+},
 	
 	// Maps a keycode to the HTML element for that key
 	mapKeyToElement: function(keyCode) {
