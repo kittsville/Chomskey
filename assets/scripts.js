@@ -141,7 +141,6 @@ var Keyboard = {
 			event.preventDefault();
 			
 			if (keyCharacter.match(this.s.combiningCharacterRegex)) {
-				console.log('here');
 				this.s.typingArea.insertAtCaret(keyCharacter, -1);
 			} else {
 				this.s.typingArea.insertAtCaret(keyCharacter);
