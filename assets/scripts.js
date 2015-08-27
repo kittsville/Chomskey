@@ -41,6 +41,7 @@ var Keyboard = {
 		keyboardWrap:	$('div#keyboard'),
 		typingArea:		$('div#typing-area textarea'),
 		keyElements:	{},
+		combiningCharacterRegex: /[\u0300-\u036F\u1DC0-\u1DFF\u20D0-\u20FF\uFE20-\uFE2F]/,
 		shift:			false,
 		alt:			false,
 	},
@@ -139,7 +140,12 @@ var Keyboard = {
 		if (keyCharacter !== '') {
 			event.preventDefault();
 			
-			this.s.typingArea.insertAtCaret(keyCharacter);
+			if (keyCharacter.match(this.s.combiningCharacterRegex)) {
+				console.log('here');
+				this.s.typingArea.insertAtCaret(keyCharacter, -1);
+			} else {
+				this.s.typingArea.insertAtCaret(keyCharacter);
+			}
 		}
 	},
 	
