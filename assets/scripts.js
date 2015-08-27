@@ -426,6 +426,12 @@ var Layout = {
 			dataType:	'json',
 		}).success(function(newLayout) {
 			Layout.addLayout(newLayout);
+			
+			if (window.location.hash) {
+				if (newLayout.slug === window.location.hash.slice(1)) {
+					Layout.setCurrentLayout(newLayout.slug);
+				}
+			}
 		});
 	},
 	
