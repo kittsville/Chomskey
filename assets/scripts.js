@@ -143,7 +143,7 @@ var Keyboard = {
 		event.preventDefault();
 		
 		this.s.typingArea.insertAtCaret(keyCharacter);
-	}
+	},
 	
 	// Maps a keycode to the HTML element for that key
 	mapKeyToElement: function(keyCode) {
