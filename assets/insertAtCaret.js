@@ -8,16 +8,14 @@
  * Contributors:
  * [@kittsville](https://github.com/kittsville)
  *
- * Modified to allow text insertion at an offset
+ * Modified with variable name correction
  * Original code: https://github.com/karalamalar/insertAtCaret
  *
  */
 (function ($, document, window, undefined) {
-  $.fn.insertAtCaret = function (text, offset) {
+  $.fn.insertAtCaret = function (text) {
     return this.each(function () {
       var input = this, scrollPos, strPos = 0, isModernBrowser = ("selectionStart" in input && "selectionEnd" in input), before, after, range;
-	  
-	  offset = (typeof offset === 'undefined') ? 0 : offset;
 
       if(!((input.tagName && input.tagName.toLowerCase() === "textarea") || (input.tagName && input.tagName.toLowerCase() === "input" && input.type.toLowerCase() === "text"))) {
         return;
@@ -33,8 +31,6 @@
         range.moveStart('character', -input.value.length);
         strPos = range.text.length;
       }
-	  
-	  strPos = Math.min(Math.max(0, strPos + offset), input.value.length);
 
       before      = (input.value).substring(0, strPos);
       after       = (input.value).substring(strPos, input.value.length);

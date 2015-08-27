@@ -41,7 +41,6 @@ var Keyboard = {
 		keyboardWrap:	$('div#keyboard'),
 		typingArea:		$('div#typing-area textarea'),
 		keyElements:	{},
-		combiningCharacterRegex: /[\u0300-\u036F\u1DC0-\u1DFF\u20D0-\u20FF\uFE20-\uFE2F]/,
 		shift:			false,
 		alt:			false,
 	},
@@ -143,12 +142,8 @@ var Keyboard = {
 		
 		event.preventDefault();
 		
-		if (keyCharacter.match(this.s.combiningCharacterRegex)) {
-			this.s.typingArea.insertAtCaret(keyCharacter, -1);
-		} else {
-			this.s.typingArea.insertAtCaret(keyCharacter);
-		}
-},
+		this.s.typingArea.insertAtCaret(keyCharacter);
+	}
 	
 	// Maps a keycode to the HTML element for that key
 	mapKeyToElement: function(keyCode) {

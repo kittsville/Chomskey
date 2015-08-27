@@ -4,6 +4,10 @@ body {
 	font-family: "Lucida Grande", "Lucida Sans Unicode", sans-serif;
 }
 
+textarea {
+	font-family: "Charis SIL","Doulos SIL",Gentium,"Arial Unicode MS","Lucida Sans Unicode",Arial,serif;
+}
+
 div#container {
 	margin: 0 2.5%;
 }
@@ -49,6 +53,15 @@ img#logo {
        url('fonts/dashicons.woff') format('woff'),
        url('fonts/dashicons.ttf')  format('truetype'),
        url('fonts/dashicons.svg#svgFontName') format('svg');
+}
+
+@font-face {
+  font-family: 'DoulosSILR';
+  src: url('fonts/DoulosSILR.eot');
+  src: url('fonts/DoulosSILR.eot?#iefix') format('embedded-opentype'),
+       url('fonts/DoulosSILR.woff') format('woff'),
+       url('fonts/DoulosSILR.ttf')  format('truetype'),
+       url('fonts/DoulosSILR.svg#svgFontName') format('svg');
 }
 
 /* Edit Key Window */
