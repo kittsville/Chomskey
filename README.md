@@ -14,7 +14,7 @@ Powered by Magic Dust and jQuery.
 
 Q. Why make this?
 
-A. It started with my boyfriend (a linguist) mentioning the problem of doing work at uni when there isn't a keyboard layout installed that lets you type IPA symbols. While there's [this](http://westonruter.github.io/ipa-chart/keyboard/) amazing tool it doesn't have the same ease of typing with [UCL's IPA keyboard layout](http://www.phon.ucl.ac.uk/resource/phonetics/) installed.
+A. It started with my boyfriend (a linguist) mentioning the problem of doing work at uni when there isn't a keyboard layout installed that lets you type IPA symbols. While there's [this](http://westonruter.github.io/ipa-chart/keyboard/) amazing tool it doesn't have the same ease of typing with [UCL's IPA keyboard layout](http://www.phon.ucl.ac.uk/resource/phonetics/) installed. Rather than hard-coding the IPA in I decided to make it capable of handling any layout given a JSON config file.
 
 ---
 
