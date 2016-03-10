@@ -28,6 +28,10 @@ Q. Really?
 
 A. Yes, really.
 
+###Contributing
+
+The application is a bit of a mess as I made this primarily for pun value. If you see any way of improving it feel free to fork it. If I ever find the time I might rewrite this thing from scratch. There's currently no `dev` branch so just fork `master`. If you have a questions just [email me](mailto:kittsville@gmail.com).
+
 ###License
 
 This code is licensed under GPL V2 or later. [The WordPress Dashicons](https://developer.wordpress.org/resource/dashicons/) font files used are licensed under GPL V2 or later with font exception.
