@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/kittsville/Chomskey/master/assets/logo.png" />
+  <img src="https://raw.githubusercontent.com/kittsville/Chomskey/master/assets/logo_trans.png" />
 </p>
 
 # Chomskey - Online Keyboard Layouts
