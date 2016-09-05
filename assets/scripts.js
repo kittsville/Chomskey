@@ -38,11 +38,11 @@ var Chomskey = {
 var Keyboard = {
 	// Settings
 	s: {
-		keyboardWrap:	$('div#keyboard'),
-		typingArea:		$('div#typing-area textarea'),
-		keyElements:	{},
-		shift:			false,
-		alt:			false,
+		keyboardWrap:   $('div#keyboard'),
+		typingArea:     $('div#typing-area textarea'),
+		keyElements:    {},
+		shift:          false,
+		alt:            false,
 	},
 	
 	init: function() {
@@ -112,8 +112,8 @@ var Keyboard = {
 			
 			case 'keyup':
 				if ((event.which === 16 && Keyboard.s.shift === true) || (event.which === 18 && Keyboard.s.alt === true)) {
-					Keyboard.s.shift	= false;
-					Keyboard.s.alt		= false;
+					Keyboard.s.shift    = false;
+					Keyboard.s.alt      = false;
 					
 					Keyboard.changeCurrentLabels(Layout.mapKeyToLabel);
 				}
@@ -177,21 +177,21 @@ var Keyboard = {
 var EditKey = {
 	// Settings
 	s: {
-		overlay:		$('div#edit-key-overlay'),
-		window:			$('div#edit-key-window'),
-		formInputs:		$('form input[type="text"]'),
-		closeButton:	$('div#close-edit-key'),
-		cancelButton:	$('a#cancel-edit'),
-		updateButton:	$('a#update-key'),
-		labelInput:		$('input#key-label'),
-		valueInput:		$('input#key-value'),
-		shiftLabelInput:$('input#key-shift-label'),
-		shiftValueInput:$('input#key-shift-value'),
-		altLabelInput:	$('input#key-alt-label'),
-		altValueInput:	$('input#key-alt-value'),
-		keyNumDisplay:	$('h2#key-number'),
-		keyIDDisplay:	$('h4#key-id'),
-		keyCode:		0,
+		overlay:         $('div#edit-key-overlay'),
+		window:          $('div#edit-key-window'),
+		formInputs:      $('form input[type="text"]'),
+		closeButton:     $('div#close-edit-key'),
+		cancelButton:    $('a#cancel-edit'),
+		updateButton:    $('a#update-key'),
+		labelInput:      $('input#key-label'),
+		valueInput:      $('input#key-value'),
+		shiftLabelInput: $('input#key-shift-label'),
+		shiftValueInput: $('input#key-shift-value'),
+		altLabelInput:   $('input#key-alt-label'),
+		altValueInput:   $('input#key-alt-value'),
+		keyNumDisplay:   $('h2#key-number'),
+		keyIDDisplay:    $('h4#key-id'),
+		keyCode:         0,
 	},
 	
 	init: function() {
@@ -254,9 +254,9 @@ var EditKey = {
 	
 	saveKey: function() {
 		Layout.updateKey(EditKey.s.keyCode,
-		EditKey.s.labelInput.val(),		EditKey.s.valueInput.val(),
+		EditKey.s.labelInput.val(),     EditKey.s.valueInput.val(),
 		EditKey.s.shiftLabelInput.val(),EditKey.s.shiftValueInput.val(),
-		EditKey.s.altLabelInput.val(),	EditKey.s.altValueInput.val()
+		EditKey.s.altLabelInput.val(),  EditKey.s.altValueInput.val()
 		);
 		
 		EditKey.closeWindow();
@@ -270,15 +270,15 @@ var EditKey = {
 var Layout = {
 	// Settings
 	s: {
-		selector:			$('select#layout-selector'),
-		downloadButton:		$('a#download-layout'),
-		uploadButton:		$('a#upload-layout'),
-		uploadField:		$('input#real-upload'),
-		layouts:			{'default':{'name':'Default','v':0.1,'alt':'Your current keyboard layout','slug':'default','map':{},'sMap':{},'altMap':{},'labels':{},'sLabels':{},'altLabels':{}}},
-		currentLayout:		{},
-		defaultLabels:		{"8":"Backspace","9":"Tab","13":"Enter","16":"Shift","17":"Ctrl","18":"Alt","20":"Caps","27":"Esc","32":"Space","48":"0","49":"1","50":"2","51":"3","52":"4","53":"5","54":"6","55":"7","56":"8","57":"9","59":";","61":"=","65":"a","66":"b","67":"c","68":"d","69":"e","70":"f","71":"g","72":"h","73":"i","74":"j","75":"k","76":"l","77":"m","78":"n","79":"o","80":"p","81":"q","82":"r","83":"s","84":"t","85":"u","86":"v","87":"w","88":"x","89":"y","90":"z","91":"Start","93":"Select","112":"F1","113":"F2","114":"F3","115":"F4","116":"F5","117":"F6","118":"F7","119":"F8","120":"F9","121":"F10","122":"F11","123":"F12","163":"#","173":"-","188":",","190":".","191":"/","192":"`","219":"[","220":"\\","221":"]","222":"'"},
-		defaultShiftLabels:	{"48":")","49":"!","50":"\"","51":"£","52":"$","53":"%","54":"^","55":"&","56":"*","57":"(","59":":","61":"+","65":"A","66":"B","67":"C","68":"D","69":"E","70":"F","71":"G","72":"H","73":"I","74":"J","75":"K","76":"L","77":"M","78":"N","79":"O","80":"P","81":"Q","82":"R","83":"S","84":"T","85":"U","86":"V","87":"W","88":"X","89":"Y","90":"Z","163":"~","173":"_","188":"<","190":">","191":"?","192":"¬","219":"{","220":"|","221":"}","222":"@"},
-		defaultAltLabels:	{"52":"€","192":"¦"},
+		selector:           $('select#layout-selector'),
+		downloadButton:     $('a#download-layout'),
+		uploadButton:       $('a#upload-layout'),
+		uploadField:        $('input#real-upload'),
+		layouts:            {'default':{'name':'Default','v':0.1,'alt':'Your current keyboard layout','slug':'default','map':{},'sMap':{},'altMap':{},'labels':{},'sLabels':{},'altLabels':{}}},
+		currentLayout:      {},
+		defaultLabels:      {"8":"Backspace","9":"Tab","13":"Enter","16":"Shift","17":"Ctrl","18":"Alt","20":"Caps","27":"Esc","32":"Space","48":"0","49":"1","50":"2","51":"3","52":"4","53":"5","54":"6","55":"7","56":"8","57":"9","59":";","61":"=","65":"a","66":"b","67":"c","68":"d","69":"e","70":"f","71":"g","72":"h","73":"i","74":"j","75":"k","76":"l","77":"m","78":"n","79":"o","80":"p","81":"q","82":"r","83":"s","84":"t","85":"u","86":"v","87":"w","88":"x","89":"y","90":"z","91":"Start","93":"Select","112":"F1","113":"F2","114":"F3","115":"F4","116":"F5","117":"F6","118":"F7","119":"F8","120":"F9","121":"F10","122":"F11","123":"F12","163":"#","173":"-","188":",","190":".","191":"/","192":"`","219":"[","220":"\\","221":"]","222":"'"},
+		defaultShiftLabels: {"48":")","49":"!","50":"\"","51":"£","52":"$","53":"%","54":"^","55":"&","56":"*","57":"(","59":":","61":"+","65":"A","66":"B","67":"C","68":"D","69":"E","70":"F","71":"G","72":"H","73":"I","74":"J","75":"K","76":"L","77":"M","78":"N","79":"O","80":"P","81":"Q","82":"R","83":"S","84":"T","85":"U","86":"V","87":"W","88":"X","89":"Y","90":"Z","163":"~","173":"_","188":"<","190":">","191":"?","192":"¬","219":"{","220":"|","221":"}","222":"@"},
+		defaultAltLabels:   {"52":"€","192":"¦"},
 	},
 	
 	init: function() {
@@ -288,10 +288,10 @@ var Layout = {
 	},
 	
 	bindUIActions: function() {
-		this.s.selector.on('change',		Layout.updateSelected);
-		this.s.downloadButton.on('click',	Layout.download);
-		this.s.uploadButton.on('click',		Layout.emulateUploadField);
-		this.s.uploadField.on('change',		Layout.processUpload);
+		this.s.selector.on('change',      Layout.updateSelected);
+		this.s.downloadButton.on('click', Layout.download);
+		this.s.uploadButton.on('click',   Layout.emulateUploadField);
+		this.s.uploadField.on('change',   Layout.processUpload);
 	},
 	
 	// Finds the highest priority label/value for a keyCode
@@ -348,11 +348,11 @@ var Layout = {
 	},
 	
 	download: function() {
-		var filename	= Layout.s.currentLayout.slug + '.zardoz',
-		url				= URL.createObjectURL(new Blob([JSON.stringify(Layout.s.currentLayout)], {type: "application/Keyboard"}));
+		var filename = Layout.s.currentLayout.slug + '.zardoz',
+		url          = URL.createObjectURL(new Blob([JSON.stringify(Layout.s.currentLayout)], {type: "application/Keyboard"}));
 		
 		Layout.s.downloadButton.attr('download', filename);
-		Layout.s.downloadButton.attr('href', url);
+		Layout.s.downloadButton.attr('href',     url);
 	},
 	
 	processUpload: function(e) {
@@ -398,7 +398,7 @@ var Layout = {
 		}
 		
 		if (Chomskey.s.version != newLayout.v) {
-			alert('Layout ' +	newLayout.name + ' (version ' + newLayout.v + ') incompatible with Chomskey (version ' + Chomskey.s.version + ')');
+			alert('Layout ' +   newLayout.name + ' (version ' + newLayout.v + ') incompatible with Chomskey (version ' + Chomskey.s.version + ')');
 			return;
 		}
 		
@@ -418,9 +418,9 @@ var Layout = {
 	
 	loadLocalLayout: function(layoutName) {
 		$.ajax({
-			url:		'layouts/' + layoutName + '.zardoz',
-			cache:		true,
-			dataType:	'json',
+			url:      'layouts/' + layoutName + '.zardoz',
+			cache:    true,
+			dataType: 'json',
 		}).success(function(newLayout) {
 			Layout.addLayout(newLayout);
 			
@@ -434,12 +434,12 @@ var Layout = {
 	
 	updateKey: function(keyCode, label, value, shiftLabel, shiftValue, altLabel, altValue) {
 		$.each({
-			'map':		value,
-			'labels':	label,
-			'sMap':		shiftValue,
-			'sLabels':	shiftLabel,
-			'altMap':	altValue,
-			'altLabels':altLabel,
+			'map':       value,
+			'labels':    label,
+			'sMap':      shiftValue,
+			'sLabels':   shiftLabel,
+			'altMap':    altValue,
+			'altLabels': altLabel,
 		}, function(layoutKey, layoutValue) {
 			delete Layout.s.currentLayout[layoutKey][keyCode];
 			
@@ -458,9 +458,9 @@ var Layout = {
 		
 		$.each(Layout.s.layouts, function(i, layout) {
 			newLayouts.push($('<option/>', {
-				value:	layout.slug,
-				html:	layout.name,
-				title:	layout.alt,
+				value: layout.slug,
+				html:  layout.name,
+				title: layout.alt,
 			}));
 		});
 		
